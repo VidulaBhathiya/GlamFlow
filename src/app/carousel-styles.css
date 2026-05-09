@@ -1,0 +1,31 @@
+.slick-dots li button:before {
+  color: #D4A5A5 !important;
+  font-size: 12px !important;
+  opacity: 0.35 !important;
+  transition: opacity 180ms ease, color 180ms ease;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #D4A5A5 !important;
+  opacity: 1 !important;
+}
+
+.slick-dots {
+  bottom: -44px !important;
+}
+
+.slick-dots li {
+  margin: 0 3px !important;
+}
+
+.slick-slider .slick-arrow {
+  width: 44px;
+  height: 44px;
+  z-index: 2;
+}
+
+.slick-slider .slick-prev,
+.slick-slider .slick-next {
+  width: 44px;
+  height: 44px;
+}
