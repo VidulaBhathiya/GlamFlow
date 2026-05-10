@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite'
 import path from 'path'
+import { fileURLToPath } from 'url' // මේ පේළිය අනිවාර්යයෙන්ම තියෙන්න ඕනේ
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
-//
+// ES Modules වලදී __dirname ලබා ගැනීමට අවශ්‍ය කෝඩ් එක
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+// Figma assets resolve කරන්න පාවිච්චි කරන custom function එක
 function figmaAssetResolver() {
   return {
     name: 'figma-asset-resolver',
@@ -17,7 +22,7 @@ function figmaAssetResolver() {
 }
 
 export default defineConfig({
-  // Vercel deployment 
+  // Vercel deployment සඳහා base එක '/' විය යුතුමයි
   base: '/', 
   
   plugins: [
@@ -28,16 +33,13 @@ export default defineConfig({
   
   resolve: {
     alias: {
-      // (e.g. '@/components/Button')
       '@': path.resolve(__dirname, './src'),
     },
   },
   
-  // 
   assetsInclude: ['**/*.svg', '**/*.csv'],
   
   build: {
-    // Vercel 
     outDir: 'dist',
   },
 })
