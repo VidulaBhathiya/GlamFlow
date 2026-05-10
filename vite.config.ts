@@ -3,11 +3,11 @@ import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
+//
 function figmaAssetResolver() {
   return {
     name: 'figma-asset-resolver',
-    // 'id' එක string එකක් බව මෙහිදී සඳහන් කර ඇත
-    resolveId(id: string) { 
+    resolveId(id: string) {
       if (id.startsWith('figma:asset/')) {
         const filename = id.replace('figma:asset/', '')
         return path.resolve(__dirname, 'src/assets', filename)
@@ -17,17 +17,27 @@ function figmaAssetResolver() {
 }
 
 export default defineConfig({
-  // GitHub Pages සඳහා මෙය අත්‍යවශ්‍යයි
-  base: '/GlamFlow/', 
+  // Vercel deployment 
+  base: '/', 
+  
   plugins: [
     figmaAssetResolver(),
     react(),
     tailwindcss(),
   ],
+  
   resolve: {
     alias: {
+      // (e.g. '@/components/Button')
       '@': path.resolve(__dirname, './src'),
     },
   },
+  
+  // 
   assetsInclude: ['**/*.svg', '**/*.csv'],
+  
+  build: {
+    // Vercel 
+    outDir: 'dist',
+  },
 })
